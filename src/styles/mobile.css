@@ -1,0 +1,230 @@
+/* Mobile Optimization Styles */
+/* Add to globals.css or create mobile.css */
+
+/* Mobile Navigation Improvements */
+@media (max-width: 768px) {
+  /* Navigation spacing */
+  .mobile-nav {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-menu-btn:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Mobile menu items */
+  .mobile-menu-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+  }
+  
+  .mobile-menu-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Mobile character selector */
+  .mobile-character-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    background-color: rgba(31, 41, 55, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    color: white;
+  }
+  
+  /* Mobile dashboard cards */
+  .mobile-dashboard-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Mobile event countdown */
+  .mobile-event-item {
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .mobile-event-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  
+  .mobile-event-time {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  /* Mobile buttons */
+  .mobile-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile tables */
+  .mobile-table {
+    font-size: 0.75rem;
+    overflow-x: auto;
+  }
+  
+  .mobile-table th,
+  .mobile-table td {
+    padding: 0.5rem 0.25rem;
+    white-space: nowrap;
+  }
+  
+  /* Mobile modals */
+  .mobile-modal {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .mobile-modal-content {
+    padding: 1rem;
+  }
+  
+  /* Mobile form inputs */
+  .mobile-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Mobile text sizes */
+  .mobile-text-sm {
+    font-size: 0.75rem;
+  }
+  
+  .mobile-text-base {
+    font-size: 0.875rem;
+  }
+  
+  .mobile-text-lg {
+    font-size: 1rem;
+  }
+  
+  .mobile-text-xl {
+    font-size: 1.125rem;
+  }
+  
+  /* Mobile spacing */
+  .mobile-p-2 {
+    padding: 0.5rem;
+  }
+  
+  .mobile-p-3 {
+    padding: 0.75rem;
+  }
+  
+  .mobile-p-4 {
+    padding: 1rem;
+  }
+  
+  .mobile-mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-mb-3 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .mobile-mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile grid adjustments */
+  .mobile-grid-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  /* Mobile hero section */
+  .mobile-hero-logo {
+    width: 12rem;
+    height: auto;
+  }
+  
+  .mobile-hero-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .mobile-hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  
+  /* Mobile download buttons */
+  .mobile-download-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Mobile footer */
+  .mobile-footer {
+    padding: 2rem 1rem;
+  }
+  
+  .mobile-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Mobile social icons */
+  .mobile-social-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tablet-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Remove hover effects on touch devices */
+  .touch-no-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Better button spacing */
+  .touch-button {
+    margin-bottom: 0.75rem;
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "nameGame": "MUVIETNAM2005.COM",
+  "gameTitle": "Mu Online 99b",
+  "gameSubtitle": "MU cổ, đúng chất hoài niệm",
+  "serverName": "MU 99b",
+  "serverVersion": "99b",
+  "phone": "086546666",
+  "email": "support@muvietnam2005.com",
+  "address": "Việt Nam",
+  "websiteUrl": "https://muvietnam2005.com",
+  "websiteName": "MUVIETNAM2005.COM",
+  "events": [
+    {
+      "id": 1,
+      "name": "[Chaos Castle]",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 0,
+        "duration": 10
+      },
+      "color": "#CC0000"
+    },
+    {
+      "id": 2,
+      "name": "[Devil Square]",
+      "schedule": {
+        "type": "hourly",
+        "interval": 4,
+        "startMinute": 0,
+        "duration": 10
+      },
+      "color": "#FFD700"
+    },
+    {
+      "id": 3,
+      "name": "[Blood Castle]",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 0,
+        "duration": 10
+      },
+      "color": "#FF6600"
+    },
+    {
+      "id": 4,
+      "name": "Death King",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 5,
+        "duration": 10
+      },
+      "color": "#FFA500"
+    },
+    {
+      "id": 5,
+      "name": "Red Dragon",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 30,
+        "duration": 10
+      },
+      "color": "#990000"
+    },
+    {
+      "id": 6,
+      "name": "Golden Dragon",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 30,
+        "duration": 10
+      },
+      "color": "#FFD700"
+    },
+    {
+      "id": 7,
+      "name": "White Wizard",
+      "schedule": {
+        "type": "hourly",
+        "interval": 2,
+        "startMinute": 0,
+        "duration": 10
+      },
+      "color": "#FF6600"
+    },
+    {
+      "id": 10,
+      "name": "Erohim",
+      "schedule": {
+        "type": "specific",
+        "times": [
+          "06:00",
+          "09:00",
+          "17:00",
+          "20:00"
+        ],
+        "duration": 10
+      },
+      "color": "#CC0000"
+    },
+    {
+      "id": 11,
+      "name": "Kundun",
+      "schedule": {
+        "type": "specific",
+        "times": [
+          "09:15",
+          "12:15",
+          "20:15",
+          "21:15"
+        ],
+        "duration": 10
+      },
+      "color": "#CC0000"
+    }
+  ],
+  "downloadLinks": {
+    "mediafire": "",
+    "mega": "",
+    "clientVersion": "V2.1",
+    "fileSize": "119.7"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/share/1E3FQyBFYA/?mibextid=wwXIfr",
+    "youtube": "https://youtube.com/@SEASON1.0",
+    "discord": "https://discord.gg/SEASON1.0",
+    "zalo": "https://zalo.me/0325324860",
+    "tiktok": "https://www.tiktok.com/@SEASON1.0"
+  },
+  "linkZalo": "",
+  "linkFacebook": "",
+  "linkDiscord": "",
+  "linkTikTok": "",
+  "linkYoutube": "https://youtube.com/@SEASON1.0",
+  "bankTransfer": {
+    "accountNumber": "03566730165",
+    "accountHolder": "NGUYEN AVATAR",
+    "bankName": "MB-BANK",
+    "qrCodeUrl": "https://img.vietqr.io/image/MB-0356673016-qr_only.png"
+  },
+  "serverInfo": {
+    "name": "MU 99b",
+    "version": "99b",
+    "expRate": "100%",
+    "dropRate": "5%"
+  },
+  "theme": {
+    "preset": "gold",
+    "accent": "#d97706",
+    "accentDark": "#b45309",
+    "accentLight": "#fbbf24",
+    "background": "#0a0805"
+  },
+    "statsBoost": {
+    "totalAccounts": 1245,
+    "totalCharacters": 6225,
+    "totalGuilds": 8,
+    "onlinePlayers": 116
+  },
+  "rankings": {
+    "tabs": [
+      { "id": "level", "enabled": true, "label": "Top Reset" },
+      { "id": "killers", "enabled": true, "label": "Top Sát thủ" },
+      { "id": "guild", "enabled": true, "label": "Top Bang hội" },
+      { "id": "online", "enabled": false, "label": "Top trực tuyến" },
+      { "id": "blood-castle", "enabled": false, "label": "Top Huyết Lâu" },
+      { "id": "devil-square", "enabled": false, "label": "Top Quảng Trường Quỷ" },
+      { "id": "chaos-castle", "enabled": false, "label": "Top Hỗn Nguyên Lâu" },
+      { "id": "kundun", "enabled": false, "label": "Top Săn Kundun" },
+      { "id": "erohim", "enabled": false, "label": "Top Săn Erohim" },
+      { "id": "red-dragon", "enabled": false, "label": "Top Săn Rồng Đỏ" }
+    ]
+  },
+  "expRate": "100%",
+  "dropRate": "5%",
+  "poweredByName": "",
+  "footerLogoImage": ""
+}

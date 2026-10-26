@@ -1,0 +1,2082 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-family-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-family-display), var(--font-family-body), ui-sans-serif, sans-serif;
+}
+
+:root {
+  --background: #0a0510;
+  --foreground: #ededed;
+  --font-main: var(--font-family-body), "Be Vietnam Pro", Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
+  --purple-bg: #0a0510;
+  --purple-accent: #9333ea;
+  --purple-accent-light: #c084fc;
+  --purple-border: rgba(147, 51, 234, 0.25);
+  --panel-bg-top: rgba(38, 22, 58, 0.95);
+  --panel-bg-bottom: rgba(22, 12, 36, 0.92);
+}
+
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-main);
+  --font-mono: var(--font-main);
+}
+
+/* Tiêu đề nội dung — cùng Be Vietnam Pro để giữ dấu tiếng Việt */
+.font-display,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero-accent-title {
+  font-family: var(--font-family-body), "Be Vietnam Pro", Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Tiêu đề gradient — giữ dấu tiếng Việt (ệ, ư, …) không bị cắt khi bg-clip-text */
+.hero-accent-title {
+  display: inline-block;
+  line-height: 1.15;
+  padding-bottom: 0.22em;
+  margin-bottom: 0.08em;
+  overflow: visible;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: 0 0 24px rgba(168, 85, 247, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: auto;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #000000;
+}
+
+body {
+  background: #000000;
+  color: #333333;
+  font-family: var(--font-family-body), var(--font-main);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Select / dropdown — tránh khự khi cuộn qua (Chrome/Safari macOS) */
+select {
+  contain: none;
+  will-change: auto;
+}
+
+select:not([multiple]):not([size]) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.25rem;
+}
+
+/* Nền cố định — layer riêng, không dùng contain (tránh khự khi cuộn qua section) */
+.page-bg-layer {
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Panel trang chủ — nền đặc, không backdrop-blur */
+.panel-card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(192, 132, 252, 0.32);
+  background: linear-gradient(165deg, var(--panel-bg-top) 0%, var(--panel-bg-bottom) 100%);
+  box-shadow:
+    0 0 0 1px rgba(147, 51, 234, 0.1),
+    0 10px 40px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(147, 51, 234, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-card-head {
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid rgba(192, 132, 252, 0.22);
+  background: linear-gradient(90deg, rgba(147, 51, 234, 0.22) 0%, rgba(147, 51, 234, 0.04) 55%, transparent 100%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e9d5ff;
+  flex-shrink: 0;
+}
+
+/* Panel MXH — viền sáng, không pseudo-element (tránh khự khi cuộn qua) */
+.panel-card-glow {
+  border-color: rgba(216, 180, 254, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(192, 132, 252, 0.2),
+    0 12px 48px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(168, 85, 247, 0.18);
+}
+
+/* Vùng nội dung trang chủ */
+.home-content-glow {
+  position: relative;
+  background:
+    radial-gradient(ellipse 70% 55% at 35% 40%, rgba(147, 51, 234, 0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 45% at 85% 30%, rgba(192, 132, 252, 0.06) 0%, transparent 60%);
+}
+
+/* Hero — khung Game Server (modal ảnh) glow tím nổi bật */
+.hero-game-panel-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+@media (min-width: 1024px) {
+  .hero-game-panel-wrap {
+    max-width: none;
+    height: 100%;
+    max-height: 500px;
+  }
+}
+
+.hero-game-panel-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  z-index: 0;
+  border-radius: 1.35rem;
+  background: linear-gradient(
+    135deg,
+    rgba(216, 180, 254, 0.4) 0%,
+    rgba(168, 85, 247, 0.3) 35%,
+    rgba(147, 51, 234, 0.22) 70%,
+    rgba(192, 132, 252, 0.35) 100%
+  );
+  opacity: 0.75;
+}
+
+.hero-game-panel-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: 0;
+  border-radius: 1.15rem;
+  box-shadow:
+    0 0 32px rgba(168, 85, 247, 0.35),
+    0 0 56px rgba(147, 51, 234, 0.2);
+  pointer-events: none;
+}
+
+.hero-game-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: 200px;
+  max-height: min(38vh, 300px);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 2px solid rgba(216, 180, 254, 0.55);
+  background: #0a0510;
+  box-shadow:
+    0 0 0 1px rgba(233, 213, 255, 0.2),
+    0 0 32px rgba(168, 85, 247, 0.4),
+    0 0 64px rgba(147, 51, 234, 0.28),
+    0 16px 48px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 640px) {
+  .hero-game-panel {
+    max-height: min(42vh, 340px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-game-panel {
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+.hero-game-panel-head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(192, 132, 252, 0.28);
+  background: linear-gradient(180deg, rgba(30, 16, 48, 0.98) 0%, rgba(10, 5, 16, 0.95) 100%);
+  padding: 0.625rem 1rem;
+}
+
+.hero-game-panel-glow-bg {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.85;
+}
+
+/* Đảm bảo không có phần trắng/xám */
+#__next {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  background: #000000;
+}
+
+/* Đảm bảo tất cả fixed elements cover toàn bộ */
+.fixed {
+  position: fixed !important;
+}
+
+/*
+ * Không dùng selector [style*="backgroundImage"] toàn cục: nó áp vào MuPanelFrame / modal
+ * và ép 100vw×100vh + cover — làm vỡ layout. Nền trang chỉ cần .page-site-bg (PageBackground).
+ */
+
+/* Header nav: hiệu ứng phát sáng vàng khi hover (thanh sáng + glow phía dưới) */
+header nav a.nav-link-glow {
+  position: relative;
+  padding-bottom: 10px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+header nav a.nav-link-glow::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0;
+  height: 4px;
+  background: #FFD700;
+  border-radius: 2px;
+  box-shadow: 0 0 12px #FFD700, 0 0 24px rgba(255, 215, 0, 0.6), 0 0 36px rgba(255, 215, 0, 0.3);
+  transition: width 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: none;
+}
+header nav a.nav-link-glow:hover,
+header nav a.nav-link-glow[data-active="true"] {
+  color: #FFD700 !important;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3) !important;
+}
+header nav a.nav-link-glow:hover::after,
+header nav a.nav-link-glow[data-active="true"]::after {
+  width: 85% !important;
+  box-shadow: 0 0 16px #FFD700, 0 0 32px rgba(255, 215, 0, 0.7), 0 0 48px rgba(255, 215, 0, 0.4) !important;
+}
+
+/* Mobile viewport fix - Đảm bảo background cover 100% trên mobile, không khoảng trống phía trên */
+@media (max-width: 768px) {
+  html {
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  body {
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  #__next {
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+  }
+  
+  .fixed.inset-0 {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+  }
+}
+
+/* Chỉ nền trang (PageBackground) — không khớp MuPanelFrame / inline background khác */
+.page-site-bg {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+}
+
+/* Đảm bảo không có scrollbar tạo ra khoảng trống */
+html {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Đảm bảo không có khoảng trắng */
+* {
+  box-sizing: border-box;
+}
+
+/* Loại bỏ margin/padding mặc định */
+html, body, #__next {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Đảm bảo viewport không có khoảng trắng */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative;
+}
+
+/* Custom Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Mobile Sidebar Menu Styles */
+@media (max-width: 768px) {
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+  }
+  
+  /* Mobile sidebar menu */
+  .mobile-sidebar {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Mobile menu overlay */
+  .mobile-menu-overlay {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  
+  /* Ensure sidebar is above all content */
+  .mobile-sidebar-menu {
+    z-index: 100 !important;
+  }
+  
+  /* Mobile menu items touch targets */
+  .mobile-menu-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    -webkit-tap-highlight-color: rgba(255, 215, 0, 0.2);
+  }
+  
+  /* Active state for mobile menu items */
+  .mobile-menu-item:active {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes logo-animated {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.05) rotate(1deg);
+    filter: brightness(1.1);
+  }
+  50% {
+    transform: scale(1.1) rotate(0deg);
+    filter: brightness(1.2);
+  }
+  75% {
+    transform: scale(1.05) rotate(-1deg);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5),
+                 0 0 10px rgba(59, 130, 246, 0.3),
+                 0 0 15px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
+                 0 0 20px rgba(59, 130, 246, 0.6),
+                 0 0 30px rgba(59, 130, 246, 0.4);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    border-color: transparent;
+  }
+  51%, 100% {
+    border-color: #3b82f6;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-typewriter {
+  overflow: hidden;
+  border-right: 2px solid #3b82f6;
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.logo-animated {
+  animation: logo-animated 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+/* Scroll animations */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Gradient text effects */
+.gradient-text {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ef4444);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Logo Animation Effects */
+@keyframes logo-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5)) drop-shadow(0 0 40px rgba(147, 51, 234, 0.3));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.8)) drop-shadow(0 0 60px rgba(147, 51, 234, 0.6));
+    transform: scale(1.02);
+  }
+}
+
+@keyframes logo-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.logo-animated {
+  animation: logo-glow 3s ease-in-out infinite, logo-float 4s ease-in-out infinite;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: pulse-dot 1.4s ease-in-out infinite both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0s;
+}
+
+/* Advanced Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes magnetic {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, -2px);
+  }
+  50% {
+    transform: translate(2px, 2px);
+  }
+  75% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+/* Advanced utility classes */
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+.animate-rotate-in {
+  animation: rotate-in 0.6s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out forwards;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #60a5fa 50%,
+    #a78bfa 100%,
+    #fff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 3s linear infinite;
+}
+
+.animate-magnetic {
+  animation: magnetic 3s ease-in-out infinite;
+}
+
+.animate-parallax {
+  animation: parallax 20s ease-in-out infinite alternate;
+}
+
+/* Cuộn mượt hơn — tránh smooth scroll gây giật trên một số trình duyệt */
+html {
+  scroll-behavior: auto;
+}
+
+/* Ẩn scrollbar hoàn toàn */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
+}
+
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-x: hidden;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover glow effect */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5),
+              0 0 40px rgba(147, 51, 234, 0.3),
+              0 0 60px rgba(236, 72, 153, 0.2);
+}
+
+/* Button pulse effect */
+.btn-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-pulse::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-pulse:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* 3D transform on hover */
+.hover-3d {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: translateY(-5px) rotateX(5deg);
+}
+
+/* Text reveal animation */
+.text-reveal {
+  overflow: hidden;
+}
+
+.text-reveal span {
+  display: inline-block;
+  animation: slide-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Page transition fade */
+.page-transition {
+  animation: fade-in-up 0.5s ease-out;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ============================================
+   MU ONLINE SEASON 1.0 - RETRO CLASSIC STYLE
+   ============================================ */
+
+/* Retro Color Palette - Mu Online Season 1.0 */
+:root {
+  --mu-gold: #FFD700;
+  --mu-gold-dark: #FFA500;
+  --mu-orange: #FF6600;
+  --mu-red: #CC0000;
+  --mu-red-dark: #990000;
+  --mu-blue: #0066CC;
+  --mu-blue-dark: #003366;
+  --mu-brown: #8B4513;
+  --mu-brown-dark: #654321;
+  --mu-bg-dark: #0a0a0a;
+  --mu-bg-darker: #050505;
+  --mu-text-gold: #FFD700;
+  --mu-text-orange: #FFA500;
+  --mu-border-gold: #FFD700;
+}
+
+/* Retro Font - Classic Game Style */
+/* @import đã được di chuyển lên đầu file */
+
+/* Retro Background Pattern */
+.mu-retro-bg {
+  background: 
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 50%, transparent 50%),
+    linear-gradient(rgba(0, 0, 0, 0.1) 50%, transparent 50%),
+    radial-gradient(circle, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 10px 10px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+/* Retro Card Style - Classic Mu Online (với background image) */
+.mu-retro-card {
+  background-image: url('/Interface_Back.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  min-height: fit-content;
+}
+
+/* Retro Card Style - Nền đen mờ (cho register/login/dashboard) */
+.mu-retro-card-blur {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  min-height: fit-content;
+}
+
+.mu-retro-card-blur::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s;
+}
+
+.mu-retro-card-blur:hover::after {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mu-retro-card::before {
+  display: none;
+}
+
+@keyframes retro-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.mu-retro-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Overlay sáng hơn */
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s;
+}
+
+.mu-retro-card:hover::after {
+  background: rgba(0, 0, 0, 0.3); /* Sáng hơn khi hover */
+}
+
+.mu-retro-card:hover {
+  box-shadow: 
+    inset 0 0 30px rgba(255, 255, 255, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Retro Title Style */
+/* Retro Title - Classic Style với specificity cao */
+.mu-retro-title,
+h1.mu-retro-title,
+h2.mu-retro-title,
+h3.mu-retro-title,
+h4.mu-retro-title,
+h5.mu-retro-title,
+h6.mu-retro-title {
+  font-family: var(--font-main) !important;
+  color: #FFD700 !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.9),
+    0 0 30px rgba(255, 215, 0, 0.6),
+    0 0 45px rgba(255, 215, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+
+.mu-retro-title-small,
+h1.mu-retro-title-small,
+h2.mu-retro-title-small,
+h3.mu-retro-title-small,
+h4.mu-retro-title-small,
+h5.mu-retro-title-small,
+h6.mu-retro-title-small {
+  font-family: var(--font-main) !important;
+  color: #FFA500 !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 0 10px rgba(255, 165, 0, 0.9),
+    0 0 20px rgba(255, 140, 0, 0.6),
+    0 0 30px rgba(255, 140, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+
+/* Retro Button Style */
+.mu-retro-btn {
+  background: linear-gradient(135deg, var(--mu-gold-dark) 0%, var(--mu-orange) 100%);
+  border: 2px solid var(--mu-gold);
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.mu-retro-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.mu-retro-btn:hover::before {
+  left: 100%;
+}
+
+.mu-retro-btn:hover {
+  background: linear-gradient(135deg, var(--mu-gold) 0%, var(--mu-orange) 100%);
+  border-color: var(--mu-orange);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(255, 215, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.mu-retro-btn:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Classic Retro Button Style - Màu cổ điển cho nút đăng ký */
+.mu-retro-btn-classic {
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 50%, #FF7F00 100%);
+  border: 2px solid #FFD700;
+  color: #000000;
+  font-family: var(--font-main);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 14px 36px;
+  border-radius: 4px;
+  box-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.mu-retro-btn-classic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.mu-retro-btn-classic:hover::before {
+  left: 100%;
+}
+
+.mu-retro-btn-classic:hover {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF7F00 50%, #FF6B00 100%);
+  border-color: #FFA500;
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.8),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Mobile optimization for buttons */
+@media (max-width: 768px) {
+  .mu-retro-btn-classic {
+    letter-spacing: 1px;
+    border-width: 1.5px;
+  }
+  
+  .mu-retro-btn {
+    letter-spacing: 0.5px;
+    border-width: 1.5px;
+  }
+}
+
+/* Retro Border Glow */
+.mu-retro-border {
+  border: 2px solid var(--mu-gold);
+  box-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.4),
+    inset 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+.mu-retro-border-orange {
+  border: 2px solid var(--mu-orange);
+  box-shadow: 
+    0 0 10px rgba(255, 102, 0, 0.4),
+    inset 0 0 10px rgba(255, 102, 0, 0.1);
+}
+
+/* Retro Text Colors - Classic Style với specificity cao */
+.mu-text-gold,
+span.mu-text-gold,
+div.mu-text-gold,
+p.mu-text-gold,
+h1.mu-text-gold,
+h2.mu-text-gold,
+h3.mu-text-gold,
+h4.mu-text-gold,
+h5.mu-text-gold,
+h6.mu-text-gold {
+  color: #FFD700 !important;
+  font-family: var(--font-main) !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 0 12px rgba(255, 215, 0, 0.9),
+    0 0 24px rgba(255, 215, 0, 0.6),
+    0 0 36px rgba(255, 215, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+
+.mu-text-orange,
+span.mu-text-orange,
+div.mu-text-orange,
+p.mu-text-orange,
+h1.mu-text-orange,
+h2.mu-text-orange,
+h3.mu-text-orange,
+h4.mu-text-orange,
+h5.mu-text-orange,
+h6.mu-text-orange {
+  color: #FFA500 !important;
+  font-family: var(--font-main) !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 0 10px rgba(255, 165, 0, 0.9),
+    0 0 20px rgba(255, 140, 0, 0.6),
+    0 0 30px rgba(255, 140, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+
+.mu-text-red {
+  color: var(--mu-red);
+  text-shadow: 0 0 6px rgba(204, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+/* Text màu xám tối hơn để dễ đọc */
+.text-gray-300 {
+  color: #d1d5db;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  font-family: var(--font-main);
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  font-family: var(--font-main);
+}
+
+/* Text trắng tối hơn */
+.text-white {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-main);
+}
+
+/* Retro Background Overlay */
+.mu-retro-overlay {
+  background: 
+    radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.95) 100%);
+}
+
+/* Retro Badge/Label */
+.mu-retro-badge {
+  background: linear-gradient(135deg, var(--mu-red-dark) 0%, var(--mu-red) 100%);
+  border: 1px solid var(--mu-gold);
+  color: var(--mu-text-gold);
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 215, 0, 0.2);
+}
+
+.mu-retro-badge-notice {
+  background: linear-gradient(135deg, var(--mu-blue-dark) 0%, var(--mu-blue) 100%);
+}
+
+.mu-retro-badge-event {
+  background: linear-gradient(135deg, var(--mu-orange) 0%, var(--mu-gold-dark) 100%);
+  color: #000;
+}
+
+/* Retro Link Style */
+.mu-retro-link {
+  color: var(--mu-text-gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.mu-retro-link:hover {
+  color: var(--mu-text-orange);
+  border-bottom-color: var(--mu-orange);
+  text-shadow: 0 0 8px rgba(255, 165, 0, 0.8);
+}
+
+/* Retro Section Divider */
+.mu-retro-divider {
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--mu-gold), 
+    var(--mu-orange), 
+    var(--mu-gold), 
+    transparent
+  );
+  margin: 2rem 0;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Retro Glow Animation */
+@keyframes mu-glow-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 10px rgba(255, 215, 0, 0.4),
+      inset 0 0 10px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(255, 215, 0, 0.6),
+      inset 0 0 20px rgba(255, 215, 0, 0.2);
+  }
+}
+
+.mu-retro-glow {
+  animation: mu-glow-pulse 2s ease-in-out infinite;
+}
+
+/* Retro Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--mu-gold);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--mu-gold-dark) 0%, var(--mu-orange) 100%);
+  border: 1px solid var(--mu-gold);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--mu-gold) 0%, var(--mu-orange) 100%);
+}
+
+/* Retro Input Style */
+.mu-retro-input {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--mu-gold);
+  color: var(--mu-text-gold);
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-family: var(--font-main) !important;
+  font-variant: normal !important;
+  font-feature-settings: normal !important;
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+  -moz-text-transform: none !important;
+  -ms-text-transform: none !important;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.mu-retro-input:focus {
+  outline: none;
+  border-color: var(--mu-orange);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(255, 102, 0, 0.5);
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+  -moz-text-transform: none !important;
+  -ms-text-transform: none !important;
+  font-variant: normal !important;
+  font-feature-settings: normal !important;
+}
+
+/* Đảm bảo tất cả input không bị uppercase - CSS với specificity cao */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="number"],
+input.mu-retro-input,
+.mu-retro-input,
+input[type="text"].mu-retro-input,
+input[type="password"].mu-retro-input,
+input[type="email"].mu-retro-input,
+input[type="tel"].mu-retro-input {
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+  -moz-text-transform: none !important;
+  -ms-text-transform: none !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input.mu-retro-input:focus,
+.mu-retro-input:focus,
+input[type="text"].mu-retro-input:focus,
+input[type="password"].mu-retro-input:focus,
+input[type="email"].mu-retro-input:focus,
+input[type="tel"].mu-retro-input:focus {
+  font-family: var(--font-main) !important;
+  font-variant: normal !important;
+  font-feature-settings: normal !important;
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+  -moz-text-transform: none !important;
+  -ms-text-transform: none !important;
+}
+
+/* Đảm bảo placeholder không bị uppercase */
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="search"]::placeholder,
+input[type="number"]::placeholder,
+input.mu-retro-input::placeholder,
+.mu-retro-input::placeholder,
+input[type="text"].mu-retro-input::placeholder,
+input[type="password"].mu-retro-input::placeholder,
+input[type="email"].mu-retro-input::placeholder,
+input[type="tel"].mu-retro-input::placeholder {
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+  -moz-text-transform: none !important;
+  -ms-text-transform: none !important;
+}
+
+/* Webkit placeholder */
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="tel"]::-webkit-input-placeholder,
+input[type="search"]::-webkit-input-placeholder,
+input[type="number"]::-webkit-input-placeholder,
+input.mu-retro-input::-webkit-input-placeholder,
+.mu-retro-input::-webkit-input-placeholder {
+  text-transform: none !important;
+  -webkit-text-transform: none !important;
+}
+
+/* Firefox placeholder */
+input[type="text"]::-moz-placeholder,
+input[type="password"]::-moz-placeholder,
+input[type="email"]::-moz-placeholder,
+input[type="tel"]::-moz-placeholder,
+input[type="search"]::-moz-placeholder,
+input[type="number"]::-moz-placeholder,
+input.mu-retro-input::-moz-placeholder,
+.mu-retro-input::-moz-placeholder {
+  text-transform: none !important;
+  -moz-text-transform: none !important;
+}
+
+/* MS placeholder */
+input[type="text"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="email"]:-ms-input-placeholder,
+input[type="tel"]:-ms-input-placeholder,
+input[type="search"]:-ms-input-placeholder,
+input[type="number"]:-ms-input-placeholder,
+input.mu-retro-input:-ms-input-placeholder,
+.mu-retro-input:-ms-input-placeholder {
+  text-transform: none !important;
+  -ms-text-transform: none !important;
+}
+
+/* Retro Background Texture */
+.mu-retro-texture {
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.03) 2px, rgba(255, 215, 0, 0.03) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 215, 0, 0.03) 2px, rgba(255, 215, 0, 0.03) 4px);
+}
+
+/* Modal Background với nền đen mờ */
+.mu-modal-bg {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--mu-gold);
+  border-radius: 4px;
+  box-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.5),
+    inset 0 0 25px rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.mu-modal-bg::before {
+  display: none;
+}
+
+.mu-modal-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile Modal Optimization */
+@media (max-width: 768px) {
+  .mu-modal-bg {
+    padding: 0.75rem !important;
+    margin: 0.5rem !important;
+    max-width: calc(100% - 1rem) !important;
+    max-height: 90vh;
+    border-width: 1px;
+  }
+  
+  .mu-modal-content h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .mu-modal-content .space-y-2 > *,
+  .mu-modal-content .space-y-3 > *,
+  .mu-modal-content .space-y-4 > * {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .mu-modal-content label {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .mu-modal-content input {
+    padding: 0.5rem 0.625rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .mu-modal-content button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .mu-modal-content .flex.space-x-3,
+  .mu-modal-content .flex.flex-col {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+  
+  .mu-modal-content .flex.space-x-3 > button,
+  .mu-modal-content .flex.flex-col > button {
+    width: 100% !important;
+  }
+}
+
+/* Footer Gold Gradient Effects */
+.mu-footer-gradient {
+  background: 
+    linear-gradient(180deg, 
+      rgba(0, 0, 0, 0.95) 0%, 
+      rgba(10, 10, 10, 0.98) 30%,
+      rgba(20, 15, 5, 0.99) 50%,
+      rgba(10, 10, 10, 0.98) 70%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    radial-gradient(ellipse at center top, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+}
+
+.mu-footer-glow {
+  position: relative;
+}
+
+.mu-footer-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 215, 0, 0.3),
+    rgba(255, 215, 0, 0.6),
+    rgba(255, 215, 0, 0.8),
+    rgba(255, 215, 0, 1),
+    rgba(255, 215, 0, 0.8),
+    rgba(255, 215, 0, 0.6),
+    rgba(255, 215, 0, 0.3),
+    transparent
+  );
+  animation: mu-footer-scan 3s linear infinite;
+}
+
+@keyframes mu-footer-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Gold Metallic Text */
+/* Classic Text Style - Đồng nhất font toàn trang */
+.mu-classic-text,
+.mu-classic-text * {
+  font-family: var(--font-main) !important;
+  color: #FFA500 !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 0 10px rgba(255, 165, 0, 0.9),
+    0 0 20px rgba(255, 140, 0, 0.6),
+    0 0 30px rgba(255, 140, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+}
+
+/* Override Tailwind font utilities khi dùng với mu-text classes */
+/* Đảm bảo style cổ điển được áp dụng ngay cả khi dùng với Tailwind classes */
+.mu-text-gold.font-semibold,
+.mu-text-gold.font-bold,
+.mu-text-gold.font-normal,
+.mu-text-gold.font-medium,
+.mu-text-gold.text-xs,
+.mu-text-gold.text-sm,
+.mu-text-gold.text-base,
+.mu-text-gold.text-lg,
+.mu-text-gold.text-xl,
+.mu-text-gold.text-2xl,
+.mu-text-gold.text-3xl,
+.mu-text-gold.text-4xl,
+.mu-text-gold.text-5xl,
+.mu-text-orange.font-semibold,
+.mu-text-orange.font-bold,
+.mu-text-orange.font-normal,
+.mu-text-orange.font-medium,
+.mu-text-orange.text-xs,
+.mu-text-orange.text-sm,
+.mu-text-orange.text-base,
+.mu-text-orange.text-lg,
+.mu-text-orange.text-xl,
+.mu-text-orange.text-2xl,
+.mu-text-orange.text-3xl,
+.mu-text-orange.text-4xl,
+.mu-text-orange.text-5xl,
+.mu-retro-title.font-semibold,
+.mu-retro-title.font-bold,
+.mu-retro-title.font-normal,
+.mu-retro-title.font-medium,
+.mu-retro-title.text-xs,
+.mu-retro-title.text-sm,
+.mu-retro-title.text-base,
+.mu-retro-title.text-lg,
+.mu-retro-title.text-xl,
+.mu-retro-title.text-2xl,
+.mu-retro-title.text-3xl,
+.mu-retro-title.text-4xl,
+.mu-retro-title.text-5xl,
+.mu-retro-title-small.font-semibold,
+.mu-retro-title-small.font-bold,
+.mu-retro-title-small.font-normal,
+.mu-retro-title-small.font-medium,
+.mu-retro-title-small.text-xs,
+.mu-retro-title-small.text-sm,
+.mu-retro-title-small.text-base,
+.mu-retro-title-small.text-lg,
+.mu-retro-title-small.text-xl,
+.mu-retro-title-small.text-2xl,
+.mu-retro-title-small.text-3xl,
+.mu-retro-title-small.text-4xl,
+.mu-retro-title-small.text-5xl {
+  font-family: var(--font-main) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+/* Force font cho tất cả elements với mu-text classes */
+.mu-text-gold *,
+.mu-text-orange *,
+.mu-retro-title *,
+.mu-retro-title-small * {
+  font-family: var(--font-main) !important;
+  text-transform: uppercase !important;
+}
+
+.mu-gold-metallic {
+  font-family: var(--font-main);
+  font-weight: 700;
+  background: linear-gradient(135deg, 
+    #FFD700 0%,
+    #FFED4E 25%,
+    #FFD700 50%,
+    #FFA500 75%,
+    #FFD700 100%
+  );
+  background-size: 200% 200%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: mu-gold-shimmer 3s ease-in-out infinite;
+  text-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.9),
+    0 0 30px rgba(255, 215, 0, 0.6),
+    0 0 45px rgba(255, 215, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes mu-gold-shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+/* Mobile Optimization Styles */
+/* Add to globals.css or create mobile.css */
+
+/* Mobile Navigation Improvements */
+@media (max-width: 768px) {
+  /* Navigation spacing */
+  .mobile-nav {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-menu-btn:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Mobile menu items */
+  .mobile-menu-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+  }
+  
+  .mobile-menu-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Mobile character selector */
+  .mobile-character-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    background-color: rgba(31, 41, 55, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    color: white;
+  }
+  
+  /* Mobile dashboard cards */
+  .mobile-dashboard-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Mobile event countdown */
+  .mobile-event-item {
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .mobile-event-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  
+  .mobile-event-time {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  /* Mobile buttons */
+  .mobile-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile tables */
+  .mobile-table {
+    font-size: 0.75rem;
+    overflow-x: auto;
+  }
+  
+  .mobile-table th,
+  .mobile-table td {
+    padding: 0.5rem 0.25rem;
+    white-space: nowrap;
+  }
+  
+  /* Mobile modals */
+  .mobile-modal {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .mobile-modal-content {
+    padding: 1rem;
+  }
+  
+  /* Mobile form inputs */
+  .mobile-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Mobile text sizes */
+  .mobile-text-sm {
+    font-size: 0.75rem;
+  }
+  
+  .mobile-text-base {
+    font-size: 0.875rem;
+  }
+  
+  .mobile-text-lg {
+    font-size: 1rem;
+  }
+  
+  .mobile-text-xl {
+    font-size: 1.125rem;
+  }
+  
+  /* Mobile spacing */
+  .mobile-p-2 {
+    padding: 0.5rem;
+  }
+  
+  .mobile-p-3 {
+    padding: 0.75rem;
+  }
+  
+  .mobile-p-4 {
+    padding: 1rem;
+  }
+  
+  .mobile-mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-mb-3 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .mobile-mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile grid adjustments */
+  .mobile-grid-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  /* Mobile hero section */
+  .mobile-hero-logo {
+    width: 12rem;
+    height: auto;
+  }
+  
+  .mobile-hero-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .mobile-hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  
+  /* Mobile download buttons */
+  .mobile-download-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Mobile footer */
+  .mobile-footer {
+    padding: 2rem 1rem;
+  }
+  
+  .mobile-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Mobile social icons */
+  .mobile-social-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tablet-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Remove hover effects on touch devices */
+  .touch-no-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Better button spacing */
+  .touch-button {
+    margin-bottom: 0.75rem;
+  }
+}

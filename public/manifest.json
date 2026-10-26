@@ -1,0 +1,78 @@
+{
+  "name": "MUVIETNAM2005.COM - Mu Online Season 1.0",
+  "short_name": "MUVIETNAM2005",
+  "description": "MU Việt Nam, MU Online, MU SS1, MU Hà Nội SS1. Server Mu mới ra, đông người chơi tại MUVIETNAM2005.COM.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#cc0000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "vi",
+  "dir": "ltr",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/MUHANOI1.PNG",
+      "sizes": "3280x1844",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Xếp hạng",
+      "short_name": "Xếp hạng",
+      "description": "Xem bảng xếp hạng",
+      "url": "/rankings",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Tải game",
+      "short_name": "Tải game",
+      "description": "Tải client game",
+      "url": "/download",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Đăng nhập",
+      "short_name": "Đăng nhập",
+      "description": "Đăng nhập vào game",
+      "url": "/login",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

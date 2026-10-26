@@ -1,0 +1,99 @@
+# dependencies
+/node_modules
+node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# Database test files (contains sensitive info)
+test-db-connection.js
+*test-db*.js
+*test*.sql
+*test*.js
+*test*.py
+
+# Debug files
+debug-*.js
+*debug*.ts
+
+# Template and script files
+*_template.js
+clean_*.js
+clean_*.sh
+restart-*.sh
+
+# Documentation files
+*.md
+!README.md
+!DEPLOY.md
+!HUONG_DAN_CHAY_LOCAL.md
+!KIEM_TRA_KET_NOI.md
+
+# Sensitive configuration files
+*config*.js
+*password*.txt
+*secret*.txt
+
+# HTML/Lua/Text files (except important config files)
+*.html
+*.lua
+*.txt
+!package.json
+!tsconfig.json
+!next.config.js
+!next.config.ts
+!postcss.config.mjs
+!eslint.config.mjs
+!netlify.toml
+!vercel.json
+!env-template.txt
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# SQL files
+*.sql
+
+# Backend — chỉ đẩy frontend lên GitHub
+/backend/
+backend 2/
+backend.zip
+backend 2.zip
+frontend.zip
+frontend/
